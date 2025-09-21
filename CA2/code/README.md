@@ -5,17 +5,20 @@ This folder contains `CA2_Taha_Majlesi_810101504.ipynb`, the CA2 assignment note
 ---
 
 ## Files
+
 - `CA2_Taha_Majlesi_810101504.ipynb` — main notebook.
 - `README.md` — this file.
 
 ---
 
 ## Goal
+
 The notebook demonstrates dataset preparation, model/tokenizer setup, training (optionally with LoRA/PEFT), and evaluation. It includes visualization cells and diagnostic outputs.
 
 ---
 
 ## Environment & Requirements
+
 Recommended: Python 3.9+ in a virtual environment.
 
 Install dependencies (example):
@@ -30,12 +33,14 @@ pip install accelerate peft  # only if you use LoRA/PEFT
 ```
 
 Notes:
+
 - Replace `torch` installation command with a specific CUDA-compatible wheel if you have a GPU.
 - If running on an M1/M2 Mac, ensure the PyTorch wheel supports your architecture or use `conda`.
 
 ---
 
 ## Quick start — run order
+
 1. Open the notebook in JupyterLab or Jupyter Notebook.
 2. Run the top setup cell (imports, device selection, helper functions). It creates `run_inference` and `compute_and_save_metrics` helpers.
 3. Run the data-loading cell. Options:
@@ -48,18 +53,21 @@ Notes:
 ---
 
 ## Data format
+
 - The data-loading cell attempts to auto-detect text columns from `['text', 'sentence', 'content']` and infer a label column (prefers `label`, otherwise last column).
 - If your file uses different column names, edit the cell to specify `text_col` and `label_col` explicitly.
 
 ---
 
 ## Evaluation
+
 - After inference, the evaluation helper prints accuracy and macro F1, shows a per-class report, draws a confusion matrix, and saves `misclassified_samples.csv` if the dataset provides text examples.
 - Use the CSV to manually inspect problematic predictions and identify label noise or ambiguous examples.
 
 ---
 
 ## Troubleshooting
+
 - Import errors: activate the correct virtualenv where dependencies are installed and restart the kernel.
 - Out-of-memory: reduce batch size, max sequence length, or enable 8-bit optimizers if supported.
 - Tokenization mismatch: ensure the same tokenizer is used for both training and inference.
@@ -67,6 +75,7 @@ Notes:
 ---
 
 ## Notebook Structure
+
 The notebook is divided into the following major sections (based on cell groupings and markdown headers). Each section includes code cells for implementation and markdown cells for explanations.
 
 1. **Introduction and Setup (Cells 1-10)**  
@@ -92,6 +101,7 @@ Each section has inline comments and markdown explanations. Run cells sequential
 ---
 
 ## Suggested experiments
+
 - Try small LoRA sweeps (`r` in {4,8,16}, `alpha` in {8,16,32}).
 - If class imbalance exists, test class-weighted losses or simple oversampling.
 - Use temperature scaling on validation set probabilities to calibrate scores.
@@ -99,6 +109,7 @@ Each section has inline comments and markdown explanations. Run cells sequential
 ---
 
 If you'd like, I can:
+
 - Run the evaluation here and attach the `misclassified_samples.csv` and confusion matrix.
 - Add a `requirements.txt` with exact versions used in this workspace.
 - Add sample `data/*.csv` loader examples or a small script to convert CSV → HF Dataset.
